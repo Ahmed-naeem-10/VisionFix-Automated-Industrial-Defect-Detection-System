@@ -1,0 +1,58 @@
+# VisionFix Pipeline - Master Configuration
+
+project:
+  name: "VisionFix Pipeline"
+  version: "1.0.0"
+
+# Security & API Configuration (Replace placeholders with your credentials)
+api:
+  key: "YOUR_API_KEY_HERE"
+  secret: "YOUR_SECRET_KEY_HERE"
+
+
+paths:
+  raw_data:       "data/raw"
+  processed_data: "data/processed"
+  annotations:    "data/annotations"
+  models:         "models"
+  results:        "results"
+  logs:           "logs"
+
+preprocessing:
+  blur_threshold: 150
+  noise_threshold: 10.0
+  clahe_clip_limit: 2.0
+  clahe_tile_size: 8
+  target_size: [640, 640]
+  workers: 0
+
+model:
+  architecture: "yolov8n"
+  weights: "models/best.pt"
+  pretrained_weights: "yolov8n.pt"
+  confidence: 0.45
+  iou_threshold: 0.45
+  input_size: 640
+  device: "cpu"
+
+training:
+  epochs: 5
+  batch_size: 16
+  image_size: 640
+  learning_rate: 0.01
+  patience: 20
+  val_split: 0.2
+
+classes:
+  - "crazing"
+  - "inclusion"
+  - "patches"
+  - "pitted_surface"
+  - "rolled-in_scale"
+  - "scratches"
+
+dashboard:
+  host: "localhost"
+  port: 8501
+  refresh_interval: 2
+  max_history: 100

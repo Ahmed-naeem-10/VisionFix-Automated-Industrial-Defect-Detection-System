@@ -1,0 +1,15 @@
+opencv-python>=4.10.0
+numpy>=2.0.0
+torch>=2.3.0
+torchvision>=0.18.0
+ultralytics>=8.2.0
+streamlit>=1.35.0
+Pillow>=10.3.0
+scikit-image>=0.24.0
+matplotlib>=3.9.0
+pandas>=2.2.2
+plotly>=5.22.0
+PyYAML>=6.0.1
+tqdm>=4.66.4
+albumentations>=1.4.7
+watchdog>=4.0.1

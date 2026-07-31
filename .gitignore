@@ -1,0 +1,43 @@
+# Python byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments & secrets
+.env
+.env.local
+*.env
+secrets.json
+*.pem
+*.key
+
+# Logs and training outputs
+logs/
+*.log
+preprocessing.log
+
+# YOLO Training outputs and heavy weights
+runs/
+*.pt
+
+# Datasets and heavy generated data
+NEU-DET/
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/augmented/*
+!data/augmented/.gitkeep
+data/yolo_dataset/*
+!data/yolo_dataset/.gitkeep
+data/temp_upload/*
+!data/temp_upload/.gitkeep
+results/*
+!results/.gitkeep
+
+# IDE & OS specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
