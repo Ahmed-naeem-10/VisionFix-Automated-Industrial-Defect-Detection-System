@@ -218,4 +218,4 @@ Each image needs a `.txt` label file with the same base name:
 | `training.epochs` | 100 | Max training epochs |
 | `training.batch_size` | 16 | Batch size |
 | `preprocessing.blur_threshold` | 150 | Below = apply sharpening |
-| `dashboard.refresh_interval` | 2 | Dashboard refresh (seconds) |
+| `dashboard.refresh_interval` | 15 | Dashboard refresh (seconds) |
