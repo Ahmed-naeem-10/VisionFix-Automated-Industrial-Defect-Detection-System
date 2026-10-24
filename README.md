@@ -143,7 +143,7 @@ The Streamlit dashboard can be hosted for free as a public live demo.
 2. Sign in with GitHub → **New app** → select this repo → set **Main file path** to `src/dashboard.py`.
 3. Click **Deploy**. Public URL: `https://visionfix-pipeline.streamlit.app` (name is customizable).
 
-> **Live demo:** _(paste your deployed URL here once live)_
+> **🚀 Live demo:** [visionfix-automated-industrial-defect-detection-system-ntaxbib.streamlit.app](https://visionfix-automated-industrial-defect-detection-system-ntaxbib.streamlit.app)
 
 **Notes for hosting:**
 - The trained weights live at `models/best.pt` (committed) so the dashboard detects real defects out of the box.
