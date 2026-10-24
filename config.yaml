@@ -54,5 +54,5 @@ classes:
 dashboard:
   host: "localhost"
   port: 8501
-  refresh_interval: 2
+  refresh_interval: 15
   max_history: 100
