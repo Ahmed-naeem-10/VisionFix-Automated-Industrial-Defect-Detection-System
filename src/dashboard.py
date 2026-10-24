@@ -48,6 +48,29 @@ MAX_HISTORY   = CFG["dashboard"]["max_history"]
 DEFECT_CLASSES = [c for c in CLASSES if c != "good_part"]
 
 
+# ── Auto-download trained weights if missing (for HF Spaces / cold deploys) ───
+WEIGHTS_PATH = Path("models/best.pt")
+WEIGHTS_URL  = (
+    "https://github.com/Ahmed-naeem-10/"
+    "VisionFix-Automated-Industrial-Defect-Detection-System/"
+    "releases/download/v1.0/best.pt"
+)
+
+def _ensure_weights():
+    """Download best.pt from GitHub Releases if not present locally."""
+    if WEIGHTS_PATH.exists():
+        return
+    WEIGHTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    import urllib.request
+    with st.spinner("⬇ Downloading model weights (~24 MB) — first run only…"):
+        try:
+            urllib.request.urlretrieve(WEIGHTS_URL, WEIGHTS_PATH)
+        except Exception as e:
+            st.error(f"Could not download weights: {e}\n\nFalling back to base YOLOv8n.")
+
+_ensure_weights()
+
+
 # ── Cached model loader (loads YOLO once, reused across reruns/uploads) ───────
 @st.cache_resource
 def get_detector():

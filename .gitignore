@@ -22,8 +22,8 @@ runs/
 
 # Ignore model weights by default, but keep the committed demo weights
 *.pt
-!models/best.pt
 !yolov8n.pt
+# models/best.pt is served via GitHub Releases — not committed to repo
 
 # Datasets and heavy generated data
 NEU-DET/
