@@ -1,3 +1,15 @@
+---
+title: VisionFix Pipeline
+emoji: 🔍
+colorFrom: indigo
+colorTo: blue
+sdk: streamlit
+sdk_version: "1.39.0"
+app_file: src/dashboard.py
+pinned: false
+license: mit
+---
+
 # 🔍 VisionFix Pipeline — Automated Industrial Defect Detection
 
 End-to-end factory defect detection system:
