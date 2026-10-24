@@ -19,7 +19,11 @@ preprocessing.log
 
 # YOLO Training outputs and heavy weights
 runs/
+
+# Ignore model weights by default, but keep the committed demo weights
 *.pt
+!models/best.pt
+!yolov8n.pt
 
 # Datasets and heavy generated data
 NEU-DET/
@@ -33,8 +37,23 @@ data/yolo_dataset/*
 !data/yolo_dataset/.gitkeep
 data/temp_upload/*
 !data/temp_upload/.gitkeep
+
+# Detection results are ignored, except the demo seed data (charts + gallery)
 results/*
 !results/.gitkeep
+!results/batch_results.json
+!results/annotated_crazing_100.jpg
+!results/annotated_crazing_102.jpg
+!results/annotated_inclusion_1.jpg
+!results/annotated_inclusion_10.jpg
+!results/annotated_patches_1.jpg
+!results/annotated_patches_10.jpg
+!results/annotated_patches_100.jpg
+!results/annotated_pitted_surface_100.jpg
+!results/annotated_pitted_surface_101.jpg
+!results/annotated_rolled-in_scale_100.jpg
+!results/annotated_scratches_1.jpg
+!results/annotated_scratches_10.jpg
 
 # IDE & OS specific files
 .vscode/

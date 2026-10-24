@@ -95,7 +95,52 @@ streamlit run src/dashboard.py
 
 ---
 
-## 🏷️ Annotation Format (YOLO)
+## � Live Demo & Deployment
+
+The Streamlit dashboard can be hosted for free as a public live demo.
+
+### Recommended — Hugging Face Spaces (free, ML-friendly, 16 GB RAM)
+
+1. Create a free account at [huggingface.co](https://huggingface.co).
+2. Click **New Space** → choose **SDK: Streamlit**, **Hardware: CPU basic**, **Visibility: Public**.
+3. Push this repo to the Space (or clone the Space and copy files):
+   ```bash
+   git remote add space https://huggingface.co/spaces/<your-username>/visionfix-pipeline
+   git push space main
+   ```
+4. In the Space **Files** tab, edit `README.md` and add this YAML front-matter at the top:
+   ```yaml
+   ---
+   title: VisionFix Pipeline
+   emoji: 🔍
+   colorFrom: indigo
+   colorTo: blue
+   sdk: streamlit
+   sdk_version: "1.39.0"
+   app_file: src/dashboard.py
+   pinned: false
+   license: mit
+   ---
+   ```
+5. The Space installs `requirements.txt` and starts `streamlit run src/dashboard.py`.
+   Your public demo URL will be: `https://<your-username>-visionfix-pipeline.hf.space`
+
+### Alternative — Streamlit Community Cloud (deploys straight from GitHub)
+
+1. Go to [share.streamlit.io](https://share.streamlit.io).
+2. Sign in with GitHub → **New app** → select this repo → set **Main file path** to `src/dashboard.py`.
+3. Click **Deploy**. Public URL: `https://visionfix-pipeline.streamlit.app` (name is customizable).
+
+> **Live demo:** _(paste your deployed URL here once live)_
+
+**Notes for hosting:**
+- The trained weights live at `models/best.pt` (committed) so the dashboard detects real defects out of the box.
+- Inference runs on CPU (free tiers have no GPU). Expect ~0.7 s per image.
+- `results/batch_results.json` ships pre-populated so charts render immediately; upload your own image for on-demand detection.
+
+---
+
+## �🏷️ Annotation Format (YOLO)
 
 Each image needs a `.txt` label file with the same base name:
 

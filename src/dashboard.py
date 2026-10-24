@@ -47,6 +47,16 @@ MAX_HISTORY   = CFG["dashboard"]["max_history"]
 # ── Defect classes (everything except good_part)
 DEFECT_CLASSES = [c for c in CLASSES if c != "good_part"]
 
+
+# ── Cached model loader (loads YOLO once, reused across reruns/uploads) ───────
+@st.cache_resource
+def get_detector():
+    """Instantiate DefectDetector once and cache it for the session."""
+    import sys
+    sys.path.insert(0, str(Path(__file__).parent))
+    from detect import DefectDetector
+    return DefectDetector(CONFIG_PATH)
+
 # ══════════════════════════════════════════════════════════════════════════════
 # CSS Styling
 # ══════════════════════════════════════════════════════════════════════════════
@@ -275,10 +285,7 @@ def render_sidebar():
         if st.sidebar.button("▶ Run Detection"):
             with st.spinner("Running detection..."):
                 try:
-                    import sys
-                    sys.path.insert(0, str(Path(__file__).parent))
-                    from detect import DefectDetector
-                    detector = DefectDetector(CONFIG_PATH)
+                    detector = get_detector()
                     result   = detector.detect_image(str(tmp_path), save=True)
 
                     st.sidebar.success(f"Status: **{result['status'].upper()}**")
