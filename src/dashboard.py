@@ -315,12 +315,12 @@ PLOT_LAYOUT = dict(
     plot_bgcolor="rgba(0,0,0,0)",
     font=dict(family="Inter", color=C["muted"], size=11),
     margin=dict(t=36, b=24, l=8, r=8),
-    legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=C["text"])),
     title_font=dict(size=13, color=C["text"], family="Inter"),
 )
 
-# Reusable axis style (applied per-chart to avoid duplicate-key conflict)
-AXIS_STYLE = dict(gridcolor=C["border"], linecolor=C["border"], zerolinecolor=C["border"])
+# Reusable axis + legend styles (applied per-chart to avoid duplicate-key conflict)
+AXIS_STYLE   = dict(gridcolor=C["border"], linecolor=C["border"], zerolinecolor=C["border"])
+LEGEND_STYLE = dict(bgcolor="rgba(0,0,0,0)", font=dict(color=C["text"]))
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -449,6 +449,7 @@ def chart_defect_rate_over_time(df: pd.DataFrame):
         title="Defect Rate Over Time (Rolling 10)",
         height=290,
         showlegend=False,
+        legend=LEGEND_STYLE,
         xaxis=AXIS_STYLE,
         yaxis=dict(**AXIS_STYLE, ticksuffix="%")
     )
@@ -479,6 +480,7 @@ def chart_class_distribution(df: pd.DataFrame):
         **PLOT_LAYOUT,
         title="Defect Class Distribution",
         height=290,
+        legend=LEGEND_STYLE,
         xaxis=dict(**AXIS_STYLE, title="Detections"),
         yaxis=dict(**AXIS_STYLE, title="")
     )
@@ -500,6 +502,7 @@ def chart_inference_speed(df: pd.DataFrame):
         **PLOT_LAYOUT,
         title="Inference Speed Distribution",
         height=265,
+        legend=LEGEND_STYLE,
         xaxis=dict(**AXIS_STYLE, title="ms per image"),
         yaxis=dict(**AXIS_STYLE, title="Count")
     )
@@ -528,9 +531,11 @@ def chart_good_vs_defective(summary: dict):
         title="Quality Overview",
         height=265,
         showlegend=True,
+        xaxis=AXIS_STYLE,
+        yaxis=AXIS_STYLE,
         legend=dict(
+            **LEGEND_STYLE,
             orientation="h", x=0.5, xanchor="center", y=-0.05,
-            bgcolor="rgba(0,0,0,0)", font=dict(color=C["text"])
         )
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
