@@ -315,11 +315,12 @@ PLOT_LAYOUT = dict(
     plot_bgcolor="rgba(0,0,0,0)",
     font=dict(family="Inter", color=C["muted"], size=11),
     margin=dict(t=36, b=24, l=8, r=8),
-    xaxis=dict(gridcolor=C["border"], linecolor=C["border"], zerolinecolor=C["border"]),
-    yaxis=dict(gridcolor=C["border"], linecolor=C["border"], zerolinecolor=C["border"]),
     legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=C["text"])),
     title_font=dict(size=13, color=C["text"], family="Inter"),
 )
+
+# Reusable axis style (applied per-chart to avoid duplicate-key conflict)
+AXIS_STYLE = dict(gridcolor=C["border"], linecolor=C["border"], zerolinecolor=C["border"])
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -448,7 +449,8 @@ def chart_defect_rate_over_time(df: pd.DataFrame):
         title="Defect Rate Over Time (Rolling 10)",
         height=290,
         showlegend=False,
-        yaxis=dict(**PLOT_LAYOUT["yaxis"], ticksuffix="%")
+        xaxis=AXIS_STYLE,
+        yaxis=dict(**AXIS_STYLE, ticksuffix="%")
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
@@ -477,8 +479,8 @@ def chart_class_distribution(df: pd.DataFrame):
         **PLOT_LAYOUT,
         title="Defect Class Distribution",
         height=290,
-        xaxis=dict(**PLOT_LAYOUT["xaxis"], title="Detections"),
-        yaxis=dict(**PLOT_LAYOUT["yaxis"], title="")
+        xaxis=dict(**AXIS_STYLE, title="Detections"),
+        yaxis=dict(**AXIS_STYLE, title="")
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
@@ -498,8 +500,8 @@ def chart_inference_speed(df: pd.DataFrame):
         **PLOT_LAYOUT,
         title="Inference Speed Distribution",
         height=265,
-        xaxis=dict(**PLOT_LAYOUT["xaxis"], title="ms per image"),
-        yaxis=dict(**PLOT_LAYOUT["yaxis"], title="Count")
+        xaxis=dict(**AXIS_STYLE, title="ms per image"),
+        yaxis=dict(**AXIS_STYLE, title="Count")
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
@@ -761,7 +763,7 @@ def main():
             if val == "ok":        return f"color: {C['emerald']}; font-weight:600"
             return ""
 
-        styled = display_df.style.applymap(color_status, subset=["Status"])
+        styled = display_df.style.map(color_status, subset=["Status"])
         st.dataframe(styled, use_container_width=True, height=320)
 
         csv = display_df.to_csv(index=False)
